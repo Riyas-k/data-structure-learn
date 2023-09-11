@@ -31,7 +31,42 @@ class Graph {
       console.log(vertex + " => " + this.adjacencyList[vertex]);
     }
   }
-  
+  depthFirst(start) {
+    let stack = [start],
+      result = [],
+      visited = {},
+      currentVertex;
+    visited[start] = true;
+    while (stack.length) {
+      currentVertex = stack.pop();
+      result.push(currentVertex);
+      this.adjacencyList[currentVertex].forEach((neighbor) => {
+        if (!visited[neighbor]) {
+          visited[neighbor] = true;
+          stack.push(neighbor);
+        }
+      });
+    }
+    console.log(result);
+  }
+  breadthFirst(start) {
+    let queue = [start],
+      result = [],
+      visited = {},
+      currentVertex;
+    visited[start] = true;
+    while (queue.length) {
+      currentVertex = queue.shift();
+      result.push(currentVertex);
+      this.adjacencyList[currentVertex].forEach((neighbor) => {
+        if (!visited[neighbor]) {
+          visited[neighbor] = true;
+          queue.push(neighbor);
+        }
+      });
+    }
+    console.log(result);
+  }
 }
 let gr = new Graph();
 gr.addVertex("A");
@@ -39,3 +74,5 @@ gr.addVertex("B");
 gr.addVertex("C");
 gr.addEdge("A", "B");
 // gr.hasEdge('A','B')
+// gr.depthFirst("A");
+gr.breadthFirst('A')
