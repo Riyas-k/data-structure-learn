@@ -96,6 +96,23 @@ class BST {
       return this.max(root.right)
     }
   }
+  isBst(root){
+    if(root===null) return true;
+    if(root.left && root.left.value >root.value){
+      return false
+    }
+    if(!this.isBst(root.left)){
+      return false
+    }
+    if(root.right && root.right.value <root.value){
+        return false
+    }
+    if(!this.isBst(root.right)){
+      return false
+    }
+    return true
+
+  }
 }
 const bst = new BST();
 bst.insert(10);
@@ -107,4 +124,5 @@ bst.insert(5);
 // bst.postOrder(bst.root);
 // bst.inOrder(bst.root);
 // bst.BFS();
-console.log(bst.max(bst.root));
+// console.log(bst.max(bst.root));
+console.log(bst.isBst(bst.root));
